@@ -1,0 +1,423 @@
+/* =============================================================
+   白骨迎宾道 · style.css —— 暗黑墓园风（UI 程序）
+   色值与 js/config.js CONFIG.PALETTE 对齐；无外部资源。
+   ============================================================= */
+
+:root {
+  --bg:        #1B1813;   /* 画布外底 */
+  --ground:    #26221C;   /* 开阔地/面板底 */
+  --road:      #3B352A;   /* 白骨大道/分隔线 */
+  --rock:      #14110E;   /* 岩壁/深底 */
+  --tomb:      #4A4438;   /* 墓碑/边框 */
+  --bone:      #FFFFEB;   /* 骨白 */
+  --parchment: #F4ECD8;   /* 羊皮纸文字 */
+  --poison:    #47E27C;   /* 毒绿 */
+  --soul:      #4ED3FB;   /* 灵魂青 */
+  --player:    #C45C3E;   /* 赤陶（我方） */
+  --gold:      #D8A848;   /* 金（强调/魂能） */
+  --tangerine: #E89B50;   /* 橙（选中/悬停） */
+  --danger:    #E85D4A;   /* 警示红 */
+  --overlay:   rgba(12, 10, 8, 0.82);
+  --font: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--parchment);
+  font-family: var(--font);
+  font-style: normal;                 /* 中文禁止斜体 */
+  font-variant-numeric: tabular-nums; /* 数字等宽 */
+  overflow: hidden;
+  user-select: none;
+}
+
+em, i, b { font-style: normal; }
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ---------------- 顶栏 ---------------- */
+
+#hud-top {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 14px;
+  background: linear-gradient(180deg, #211D16, var(--bg));
+  border-bottom: 1px solid var(--road);
+}
+
+#soul-panel { display: flex; align-items: baseline; gap: 6px; }
+#soul-icon { color: var(--soul); font-size: 14px; text-shadow: 0 0 8px rgba(78, 211, 251, 0.6); }
+#soul-count {
+  display: inline-block;
+  min-width: 3ch;
+  color: var(--gold);
+  font-size: 20px;
+  font-weight: 700;
+}
+#soul-count.flash { animation: soul-flash 0.6s ease-out; }
+@keyframes soul-flash {
+  0%   { transform: scale(1.28); color: #FFE9A8; text-shadow: 0 0 16px var(--gold); }
+  100% { transform: scale(1);    color: var(--gold); text-shadow: none; }
+}
+#soul-label { font-size: 12px; color: rgba(244, 236, 216, 0.6); }
+
+#objective-text {
+  flex: 1 1 auto;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: rgba(244, 236, 216, 0.75);
+}
+
+#top-right { display: flex; align-items: center; gap: 8px; }
+#timer { padding: 0 6px; font-size: 15px; color: var(--parchment); }
+#hud-top button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: var(--ground);
+  border: 1px solid var(--tomb);
+  border-radius: 6px;
+  color: var(--parchment);
+  font-size: 15px;
+  line-height: 1;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+#hud-top button:hover { border-color: var(--gold); color: var(--gold); }
+#btn-audio.muted { opacity: 0.55; }
+
+/* ---------------- 战场 ---------------- */
+
+#stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: radial-gradient(ellipse at center, #221E17 0%, var(--bg) 78%);
+}
+
+#game {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  image-rendering: auto;
+  background: var(--rock);
+  border: 1px solid var(--road);
+  box-shadow: 0 0 42px rgba(0, 0, 0, 0.65);
+}
+
+/* ---------------- toast（战场右上角） ---------------- */
+
+#toasts {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  max-width: 300px;
+  pointer-events: none;
+}
+
+.toast {
+  padding: 8px 12px;
+  background: rgba(38, 34, 28, 0.95);
+  border: 1px solid var(--tomb);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  color: var(--parchment);
+  font-size: 13px;
+  line-height: 1.5;
+  transform: translateX(110%);              /* 右侧滑入 */
+  animation: toast-in 0.28s ease-out forwards;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+@keyframes toast-in { to { transform: translateX(0); } }
+.toast.out { opacity: 0; transform: translateX(24px); }
+
+.toast-good { border-left-color: var(--soul); }
+.toast-bad  { border-left-color: var(--danger); color: #F6CFC7; }
+.toast-small { padding: 5px 10px; font-size: 12px; }
+
+/* ---------------- 底栏 ---------------- */
+
+#hud-bottom {
+  flex: none;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+  padding: 10px 14px;
+  background: linear-gradient(0deg, #211D16, var(--bg));
+  border-top: 1px solid var(--road);
+}
+
+/* ---- 兵种卡 ---- */
+
+#unit-cards { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.unit-card {
+  position: relative;
+  width: 108px;
+  padding: 8px 10px 7px;
+  background: var(--ground);
+  border: 1px solid var(--tomb);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+.unit-card:hover {
+  background: #322C22;                      /* hover 微亮 */
+  border-color: var(--tangerine);
+  transform: translateY(-1px);
+}
+.unit-card.disabled {                       /* 魂能不足置灰 */
+  opacity: 0.42;
+  filter: grayscale(0.6);
+  cursor: not-allowed;
+}
+.unit-card.disabled:hover {
+  background: var(--ground);
+  border-color: var(--tomb);
+  transform: none;
+}
+
+.uc-name { font-size: 14px; font-weight: 700; }
+.uc-cost { margin-top: 2px; font-size: 12px; color: var(--gold); }
+
+.uc-key {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  padding: 0 5px;
+  line-height: 16px;
+  background: rgba(20, 17, 14, 0.6);
+  border: 1px solid var(--tomb);
+  border-radius: 3px;
+  font-size: 11px;
+  color: rgba(244, 236, 216, 0.65);
+}
+
+.uc-badge {                                 /* 当前存活数量徽章（左上角） */
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 4px;
+  background: var(--player);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  color: var(--bone);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 19px;
+  text-align: center;
+}
+
+/* 卡片 tooltip：一句话描述 */
+.unit-card::after {
+  content: attr(data-desc);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  z-index: 30;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 200px;
+  padding: 6px 10px;
+  background: var(--rock);
+  border: 1px solid var(--tomb);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  color: var(--parchment);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: normal;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+.unit-card:hover::after { opacity: 1; }
+
+/* ---- 领主面板 ---- */
+
+#lord-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  min-width: 150px;
+  padding-left: 14px;
+  border-left: 1px solid var(--road);
+}
+
+#lord-ability {
+  position: relative;
+  overflow: hidden;
+  height: 38px;
+  padding: 0 16px;
+  background: #4A2E20;
+  border: 1px solid var(--player);
+  border-radius: 6px;
+  color: var(--parchment);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.2s;
+}
+#lord-ability:hover { border-color: var(--tangerine); }
+#lord-ability.ready { box-shadow: 0 0 12px rgba(196, 92, 62, 0.55); }
+#lord-ability.cooling { cursor: default; box-shadow: none; }
+
+#lord-ability .la-label { position: relative; z-index: 2; }
+
+#lord-ability .la-cd {                      /* 冷却进度遮罩，自下而上消退 */
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  height: 0%;
+  background: rgba(12, 10, 8, 0.72);
+  border-top: 1px solid var(--soul);
+}
+
+#lord-ability .la-cd-num {                  /* 剩余秒数 */
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--soul);
+}
+#lord-ability.cooling .la-cd-num { display: flex; }
+
+#lord-hp-wrap {
+  width: 100%;
+  height: 9px;
+  background: var(--rock);
+  border: 1px solid var(--tomb);
+  border-radius: 5px;
+  overflow: hidden;
+}
+#lord-hp {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #8E3B28, var(--player));
+  transition: width 0.2s;
+}
+#lord-hp.low {
+  background: var(--danger);
+  animation: hp-pulse 0.8s infinite alternate;
+}
+@keyframes hp-pulse {
+  from { filter: brightness(0.85); }
+  to   { filter: brightness(1.25); }
+}
+
+/* ---- 选中信息 ---- */
+
+#selection-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 3px;
+  padding-left: 14px;
+  border-left: 1px solid var(--road);
+  font-size: 12px;
+  text-align: right;
+  color: rgba(244, 236, 216, 0.8);
+}
+#selection-info .si-hint { color: rgba(244, 236, 216, 0.5); letter-spacing: 0.5px; }
+#selection-info .si-hint b { color: var(--tangerine); font-weight: 700; }
+#selection-info .si-units { font-size: 13px; color: var(--parchment); }
+#selection-info .si-hp { color: var(--tangerine); }
+
+/* ---------------- 结算遮罩 ---------------- */
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--overlay);
+}
+#overlay.hidden { display: none !important; }
+
+#overlay-box {
+  min-width: 380px;
+  max-width: 520px;
+  padding: 36px 48px;
+  background: var(--ground);
+  border: 1px solid var(--tomb);
+  border-radius: 10px;
+  box-shadow: 0 12px 60px rgba(0, 0, 0, 0.7);
+  text-align: center;
+}
+
+#overlay-box h1 {
+  margin: 0 0 14px;
+  font-size: 30px;
+  letter-spacing: 4px;
+  font-weight: 700;
+}
+#overlay.win  h1 { color: var(--gold);   text-shadow: 0 0 18px rgba(216, 168, 72, 0.4); }
+#overlay.lose h1 { color: var(--danger); }
+
+#overlay-box p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(244, 236, 216, 0.85);
+}
+#overlay-box .ov-stats { margin-top: 10px; font-size: 13px; color: var(--gold); }
+
+#btn-overlay-restart {
+  margin-top: 22px;
+  padding: 10px 34px;
+  background: #4A2E20;
+  border: 1px solid var(--player);
+  border-radius: 6px;
+  color: var(--parchment);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font);
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+#btn-overlay-restart:hover { border-color: var(--gold); color: var(--gold); }

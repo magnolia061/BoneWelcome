@@ -1,0 +1,29 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.8",
+  "Category": "Game",
+  "Description": "反塔防 · 白骨迎宾道 (Reverse Tower Defense, Level 01)",
+  "Modules": [],
+  "Plugins": [
+    {
+      "Name": "ModelContextProtocol",
+      "Enabled": true
+    },
+    {
+      "Name": "AllToolsets",
+      "Enabled": true
+    },
+    {
+      "Name": "MCPClientToolset",
+      "Enabled": true
+    },
+    {
+      "Name": "PythonScriptPlugin",
+      "Enabled": true
+    },
+    {
+      "Name": "EditorScriptingUtilities",
+      "Enabled": true
+    }
+  ]
+}

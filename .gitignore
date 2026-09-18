@@ -1,0 +1,19 @@
+# === Unreal Engine ===
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.uproject.bak
+
+# === 本地临时产物 ===
+*.zip
+__pycache__/
+gh_mcp.py
+payload_a.json
+dsl_*.txt

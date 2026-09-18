@@ -1,0 +1,9 @@
+{
+  "name": "bone-welcome",
+  "private": true,
+  "version": "0.1.0",
+  "description": "反塔防 demo · 第一关「白骨迎宾道」",
+  "scripts": {
+    "dev": "node dev-server.mjs"
+  }
+}

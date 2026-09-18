@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>白骨迎宾道 · 反塔防 Demo</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="app">
+  <!-- 顶栏：魂能 / 时间 / 目标 / 音频开关 / 重开 -->
+  <header id="hud-top">
+    <div id="soul-panel"><span id="soul-icon">◆</span><span id="soul-count">100</span><span id="soul-label">魂能</span></div>
+    <div id="objective-text">目标：摧毁亡者之门</div>
+    <div id="top-right">
+      <span id="timer">00:00</span>
+      <button id="btn-audio" title="音效开关">🔊</button>
+      <button id="btn-restart" title="重新开始">↺</button>
+    </div>
+  </header>
+
+  <!-- 战场 -->
+  <main id="stage">
+    <canvas id="game"></canvas>
+    <div id="toasts"></div>
+  </main>
+
+  <!-- 底栏：兵种卡片 + 领主技能（由 ui.js 填充卡片） -->
+  <footer id="hud-bottom">
+    <div id="unit-cards"></div>
+    <div id="lord-panel">
+      <button id="lord-ability">尸潮 (Q)</button>
+      <div id="lord-hp-wrap"><div id="lord-hp"></div></div>
+    </div>
+    <div id="selection-info"></div>
+  </footer>
+
+  <!-- 结算遮罩 -->
+  <div id="overlay" class="hidden">
+    <div id="overlay-box">
+      <h1 id="overlay-title"></h1>
+      <p id="overlay-sub"></p>
+      <button id="btn-overlay-restart">再来一次</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/render.js"></script>
+<script src="js/input.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

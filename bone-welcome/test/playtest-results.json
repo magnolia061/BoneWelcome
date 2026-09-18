@@ -1,0 +1,256 @@
+{
+  "seedBase": {
+    "A": 1001,
+    "B": 2002,
+    "C": 3003,
+    "D": 4004
+  },
+  "A": {
+    "phase": "won",
+    "time": 54.7,
+    "gateHp": "0/1500",
+    "wallAlive": false,
+    "digOpened": false,
+    "riftSealed": false,
+    "soul": 20,
+    "lordHp": "500/500",
+    "aliveUnits": 24,
+    "aliveComp": {
+      "ghoul": 18,
+      "archer": 4,
+      "troll": 2
+    },
+    "towersDown": 1,
+    "skeletonsKilled": 0,
+    "aliveSkeletons": 9,
+    "deaths": 1,
+    "deathCauses": [
+      [
+        "骨刺箭塔(54.5,9.5)",
+        1
+      ]
+    ],
+    "milestones": [
+      {
+        "t": 3.68,
+        "desc": "tower-down 骨刺箭塔(9.5,6.5)"
+      },
+      {
+        "t": 26.28,
+        "desc": "wall-break"
+      },
+      {
+        "t": 54.75,
+        "desc": "gate-down"
+      },
+      {
+        "t": 54.75,
+        "desc": "win"
+      }
+    ],
+    "exceptions": 0,
+    "integrityIssues": 0,
+    "maxArrays": {
+      "units": 25,
+      "skeletons": 9,
+      "projectiles": 4
+    }
+  },
+  "B": {
+    "phase": "won",
+    "time": 180.3,
+    "gateHp": "0/1500",
+    "wallAlive": false,
+    "digOpened": true,
+    "riftSealed": true,
+    "soul": 20,
+    "lordHp": "500/500",
+    "aliveUnits": 19,
+    "aliveComp": {
+      "ghoul": 11,
+      "archer": 5,
+      "troll": 2,
+      "apostle": 1
+    },
+    "towersDown": 2,
+    "skeletonsKilled": 19,
+    "aliveSkeletons": 2,
+    "deaths": 25,
+    "deathCauses": [
+      [
+        "骷髅近战",
+        8
+      ],
+      [
+        "腐尸毒塔毒雾",
+        7
+      ],
+      [
+        "骨刺箭塔(9.5,16.5)",
+        5
+      ],
+      [
+        "骨刺箭塔(54.5,9.5)",
+        3
+      ],
+      [
+        "毒沼",
+        1
+      ],
+      [
+        "骨刺箭塔(9.5,6.5)",
+        1
+      ]
+    ],
+    "milestones": [
+      {
+        "t": 21.02,
+        "desc": "dig-done"
+      },
+      {
+        "t": 21.02,
+        "desc": "ambush wave=1"
+      },
+      {
+        "t": 27.03,
+        "desc": "ambush wave=2"
+      },
+      {
+        "t": 41.38,
+        "desc": "wall-break"
+      },
+      {
+        "t": 101.52,
+        "desc": "tower-down 墓地复活塔(41.5,12.5)"
+      },
+      {
+        "t": 117.8,
+        "desc": "seal-done"
+      },
+      {
+        "t": 135.27,
+        "desc": "tower-down 骨刺箭塔(54.5,9.5)"
+      },
+      {
+        "t": 180.28,
+        "desc": "gate-down"
+      },
+      {
+        "t": 180.28,
+        "desc": "win"
+      }
+    ],
+    "exceptions": 0,
+    "integrityIssues": 0,
+    "maxArrays": {
+      "units": 24,
+      "skeletons": 17,
+      "projectiles": 5
+    },
+    "notes": [
+      "清伏击超时强推（场上骷髅 17）"
+    ]
+  },
+  "C": {
+    "phase": "won",
+    "time": 45.8,
+    "gateHp": "0/1500",
+    "wallAlive": true,
+    "digOpened": false,
+    "riftSealed": false,
+    "soul": 0,
+    "lordHp": "500/500",
+    "aliveUnits": 21,
+    "aliveComp": {
+      "ghoul": 12,
+      "archer": 4,
+      "troll": 4,
+      "apostle": 1
+    },
+    "towersDown": 4,
+    "skeletonsKilled": 0,
+    "aliveSkeletons": 3,
+    "deaths": 0,
+    "deathCauses": [],
+    "milestones": [
+      {
+        "t": 3.78,
+        "desc": "tower-down 骨刺箭塔(9.5,6.5)"
+      },
+      {
+        "t": 17.63,
+        "desc": "tower-down 哀嚎尖塔(24.5,4.5)"
+      },
+      {
+        "t": 32.45,
+        "desc": "tower-down 墓地复活塔(41.5,12.5)"
+      },
+      {
+        "t": 39.35,
+        "desc": "tower-down 骨刺箭塔(54.5,9.5)"
+      },
+      {
+        "t": 45.78,
+        "desc": "gate-down"
+      },
+      {
+        "t": 45.78,
+        "desc": "win"
+      }
+    ],
+    "exceptions": 0,
+    "integrityIssues": 0,
+    "maxArrays": {
+      "units": 21,
+      "skeletons": 3,
+      "projectiles": 4
+    },
+    "notes": []
+  },
+  "D": {
+    "rounds": [
+      {
+        "round": 1,
+        "seed": 4005,
+        "phase": "lost",
+        "time": 320.4,
+        "deadLeftAtEnd": 1,
+        "exceptions": [],
+        "integrityIssues": [],
+        "skeletonsKilled": 12,
+        "towersDown": 1
+      },
+      {
+        "round": 2,
+        "seed": 4006,
+        "phase": "battle",
+        "time": 279.6,
+        "deadLeftAtEnd": 0,
+        "exceptions": [],
+        "integrityIssues": [],
+        "skeletonsKilled": 20,
+        "towersDown": 2
+      }
+    ],
+    "accumulated": 600,
+    "issues": [],
+    "globalMax": {
+      "units": 22,
+      "skeletons": 13,
+      "projectiles": 3
+    }
+  },
+  "bugs": [
+    {
+      "sev": "平衡（红线）",
+      "title": "无脑 Rush 竟然通关",
+      "detail": "剧本 A 在 54.7s 破门获胜，毫无策略的打法不应能赢。"
+    }
+  ],
+  "balance": [
+    "北路强度碾压南路：北路 45.8s 通关、阵亡 0，南路（挖掘+背刺+封印）180.3s、阵亡 25。哀嚎尖塔 250hp 被免疫恐惧的巨魔秒拆，恐惧机制在北路几乎无存在感；最优策略≈无脑北路。",
+    "骨墙防不住\"顺手\"：最南墙格 (32.5,17.5) 距挖掘点仅 3 格，任何在南路集结/挖掘的射手（射程 5）静止时都会自动磨墙触发 6 骷髅惊动，\"悄悄挖密道\"玩法很难成立（本次剧本 B 集结点挪到 (25.5,20.5) 才避开）。",
+    "门前箭塔 (54.5,9.5) 是唯一的门神但单体 25dps 对成群单位威慑不足：北路剧本 10 秒拆塔+破门，单位在 move 状态不还击，行军途中被箭塔白嫖（南路剧本死于行军箭塔的单位达 8 个）——两头都欠顺滑。",
+    "封印裂隙收益（+80 魂能/全塔攻速-15%/复活间隔翻倍）相对 8 秒不可受击的读条成本偏低：南路剧本中封印完成时复活塔已死，-15% 攻速对剩余两座箭塔影响有限，玩家缺乏封印动机。"
+  ]
+}
